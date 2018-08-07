@@ -22,7 +22,17 @@ var idbApp = (function() {
     return;
   }
 
-  var dbPromise = idb.open('couches-n-things', 1);  // creates database
+  var dbPromise = idb.open('couches-n-things', 2, function(upgradeDB) {  // creates database
+    switch(upgradeDB.oldVersion) {
+      case 0:
+        // placeholder case so that switch block will execute
+        // when db first created
+        // (old version is 0)
+      case 1:  // creates products object store
+        console.log('Creating products object store');
+        upgradeDB.createObjectStore('products', {keypath: 'id'});
+    }
+  });
 
   function addProducts() {
 
