@@ -30,7 +30,7 @@ var idbApp = (function() {
         // (old version is 0)
       case 1:  // creates products object store
         console.log('Creating products object store');
-        upgradeDB.createObjectStore('products', {keypath: 'id'});
+        upgradeDB.createObjectStore('products', {keyPath: 'id'});
     }
   });
 
