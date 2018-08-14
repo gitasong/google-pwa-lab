@@ -22,7 +22,7 @@ var idbApp = (function() {
     return;
   }
 
-  var dbPromise = idb.open('couches-n-things', 3, function(upgradeDB) {  // creates database
+  var dbPromise = idb.open('couches-n-things', 4, function(upgradeDB) {  // creates database
     switch(upgradeDB.oldVersion) {
       case 0:
         // placeholder case so that switch block will execute
@@ -35,6 +35,11 @@ var idbApp = (function() {
         console.log('Creating a name index');
         var store = upgradeDB.transaction.objectStore('products');
         store.createIndex('name', 'name', {unique: true});
+      case 3:
+        console.log('Creating price and description indexes');
+        var store = upgradeDB.transaction.objectStore('products');
+        store.createIndex('price', 'price');
+        store.createIndex('description', 'description');
     }
   });
 
